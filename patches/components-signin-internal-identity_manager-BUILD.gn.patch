@@ -1,0 +1,20 @@
+diff --git a/components/signin/internal/identity_manager/BUILD.gn b/components/signin/internal/identity_manager/BUILD.gn
+index e7d0ccee66fc1f84638c63af206c1ee43969349b..364eaf3686ce49f4f6a19b761cab3a6026a1f850 100644
+--- a/components/signin/internal/identity_manager/BUILD.gn
++++ b/components/signin/internal/identity_manager/BUILD.gn
+@@ -2,6 +2,7 @@
+ # Use of this source code is governed by a BSD-style license that can be
+ # found in the LICENSE file.
+ 
++import("//build/config/features.gni")
+ import("//components/signin/features.gni")
+ 
+ # This target forms the core of the IdentityManager implementation
+@@ -50,6 +51,7 @@ source_set("identity_manager") {
+     "ubertoken_fetcher_impl.h",
+   ]
+ 
++  sources += brave_components_signin_internal_identity_manager
+   configs += [ "//build/config/compiler:wexit_time_destructors" ]
+ 
+   public_deps = [
