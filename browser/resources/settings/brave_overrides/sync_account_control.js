@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
 
-import {RegisterPolymerTemplateModifications} from 'chrome://brave-resources/polymer_overriding.js'
+import {RegisterPolymerComponentBehaviors, RegisterPolymerTemplateModifications} from 'chrome://brave-resources/polymer_overriding.js'
 
 RegisterPolymerTemplateModifications({
   'settings-sync-account-control': (templateContent) => {
@@ -20,4 +20,12 @@ RegisterPolymerTemplateModifications({
     banner.hidden = true
     promo_header.hidden = true
   }
+})
+
+RegisterPolymerComponentBehaviors({
+  'settings-sync-account-control': [{
+    attached: function() {
+      this.addWebUIListener('stored-accounts-updated', function() {});
+    }
+  }]
 })
