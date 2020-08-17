@@ -15,6 +15,7 @@ const SITE_SETTINGS_REMOVE_IDS = [
 RegisterPolymerComponentBehaviors({
   'settings-site-settings-page': [{
     registered: function() {
+      console.error('[Brave Settings Overrides] Testing site_settings_page!!')
       if (!this.properties || !this.properties.lists_ || !this.properties.lists_.value) {
         console.error('[Brave Settings Overrides] Could not find polymer lists_ property')
         return

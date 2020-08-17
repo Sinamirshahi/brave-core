@@ -9,7 +9,7 @@ import {Polymer, PolymerElement} from 'chrome://resources/polymer/v3_0/polymer/p
 import CrButtonStyleTemplate from './overrides/cr_button.js'
 import CrToggleStyleTemplate from './overrides/cr_toggle.js'
 
-const debug = false
+const debug = true
 
 if (debug) {
   // Useful to diagnose module definition timing for template modification
@@ -68,7 +68,7 @@ function addBraveStyleOverride(moduleName, component) {
 
 export function RegisterPolymerComponentBehaviors(behaviorsMap) {
   if (debug) {
-    console.log('RegisterPolymerComponentBehaviors', ...Object.keys(behaviorsMap))
+    console.error('RegisterPolymerComponentBehaviors', ...Object.keys(behaviorsMap))
   }
   Object.assign(allBehaviorsMap, behaviorsMap)
 }
@@ -168,7 +168,7 @@ export function OverrideIronIcons(iconSetName, overridingIconSetName, iconOverri
 
 function PerformBraveModifications(name, component) {
   if (debug) {
-    console.debug(`Polymer component registering: ${name}`, component)
+    console.error(`Polymer component registering: ${name}`, component)
   }
   addBraveBehaviors(name, component)
   const templateModifyFn = allBraveTemplateModificationsMap[name]

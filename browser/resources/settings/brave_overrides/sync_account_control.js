@@ -24,8 +24,16 @@ RegisterPolymerTemplateModifications({
 
 RegisterPolymerComponentBehaviors({
   'settings-sync-account-control': [{
-    attached: function() {
-      this.addWebUIListener('stored-accounts-updated', function() {});
+    registered: function() {
+      console.error('Yolo Account Control!!')
+      if (!this.properties || !this.properties.shouldShowAvatarRow_) {
+        console.error('[Brave Settings Overrides] Could not find polymer shouldShowAvatarRow_ property')
+        return
+      }
+      this.properties.shouldShowAvatarRow_ = {
+        type: Boolean,
+        value: false,
+      }
     }
   }]
 })
