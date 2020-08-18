@@ -3,7 +3,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this file,
 // you can obtain one at http://mozilla.org/MPL/2.0/.
 
-import {RegisterPolymerComponentBehaviors, RegisterPolymerTemplateModifications} from 'chrome://brave-resources/polymer_overriding.js'
+import {RegisterPolymerComponentProperties, RegisterPolymerTemplateModifications} from 'chrome://brave-resources/polymer_overriding.js'
 
 RegisterPolymerTemplateModifications({
   'settings-sync-account-control': (templateContent) => {
@@ -22,18 +22,11 @@ RegisterPolymerTemplateModifications({
   }
 })
 
-RegisterPolymerComponentBehaviors({
-  'settings-sync-account-control': [{
-    registered: function() {
-      console.error('Registered settings-sync-account-control!!')
-      if (!this.properties || !this.properties.shouldShowAvatarRow_) {
-        console.error('[Brave Settings Overrides] Could not find polymer shouldShowAvatarRow_ property')
-        return
-      }
-      this.properties.shouldShowAvatarRow_ = {
-        type: Boolean,
-        value: false,
-      }
+RegisterPolymerComponentProperties({
+  'settings-sync-account-control': {
+    shouldShowAvatarRow_: {
+      type: Boolean,
+      value: false
     }
-  }]
+  }
 })

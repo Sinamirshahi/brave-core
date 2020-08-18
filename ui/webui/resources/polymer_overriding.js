@@ -18,12 +18,24 @@ if (debug) {
 }
 
 const allBehaviorsMap = {}
+const allPropertiesMap = {}
+const missingComponentsMap = {}
 
 function addBraveBehaviors(moduleName, component) {
   if (allBehaviorsMap[moduleName]) {
     component.behaviors = component.behaviors || []
     component.behaviors.push(...allBehaviorsMap[moduleName])
     delete allBehaviorsMap[moduleName]
+  }
+}
+
+function addBraveProperties(moduleName, component) {
+  if (allPropertiesMap[moduleName]) {
+    component.properties = component.properties || {}
+    Object.assign(component.properties, allPropertiesMap[moduleName])
+    delete allPropertiesMap[moduleName]
+  } else {
+    missingComponentsMap[moduleName] = component
   }
 }
 
@@ -71,6 +83,18 @@ export function RegisterPolymerComponentBehaviors(behaviorsMap) {
     console.error('RegisterPolymerComponentBehaviors', ...Object.keys(behaviorsMap))
   }
   Object.assign(allBehaviorsMap, behaviorsMap)
+}
+
+export function RegisterPolymerComponentProperties(propertiesMap) {
+  if (debug) {
+    console.error('RegisterPolymerComponentProperties', ...Object.keys(propertiesMap))
+  }
+  Object.assign(allPropertiesMap, propertiesMap)
+  for (const componentName in propertiesMap) {
+    if (missingComponentsMap[componentName]) {
+        addBraveProperties(componentName, missingComponentsMap[componentName])
+    }
+  }
 }
 
 export function RegisterPolymerTemplateModifications(modificationsMap) {
@@ -171,6 +195,7 @@ function PerformBraveModifications(name, component) {
     console.error(`Polymer component registering: ${name}`, component)
   }
   addBraveBehaviors(name, component)
+  addBraveProperties(name, component)
   const templateModifyFn = allBraveTemplateModificationsMap[name]
   if (templateModifyFn) {
     addBraveTemplateModifications(name, component, templateModifyFn)
