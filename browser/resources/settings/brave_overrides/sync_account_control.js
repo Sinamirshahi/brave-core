@@ -25,7 +25,7 @@ RegisterPolymerTemplateModifications({
 RegisterPolymerComponentBehaviors({
   'settings-sync-account-control': [{
     registered: function() {
-      console.error('Yolo Account Control!!')
+      console.error('Registered settings-sync-account-control!!')
       if (!this.properties || !this.properties.shouldShowAvatarRow_) {
         console.error('[Brave Settings Overrides] Could not find polymer shouldShowAvatarRow_ property')
         return
